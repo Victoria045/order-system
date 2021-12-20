@@ -8,7 +8,7 @@
 			<div class="col-lg-4">
 				<img class="thumbnail" src="{{product.image.url}}">
 				<div class="box-element product">
-					<h6><strong>{{product.name}}</strong></h6>
+					<h6 class="text-center"><strong>{{product.name}}</strong></h6>
 					<hr>
 	
 					<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
@@ -20,6 +20,32 @@
 			</div>
 			{% endfor %}
 		</div>
+
+		{#{% if user.is_authenticated %}#}
+        <div class="modal fade bd-example-modal-xl" id="ModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Upload a book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input type="submit" class="btn btn-sm btn-info" value="Save"/>
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#{% endif %}#}
 	</div>
 	
 {% endblock content %}

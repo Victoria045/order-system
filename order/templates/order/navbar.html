@@ -14,14 +14,41 @@
  
     </ul>
     <div class="form-inline my-2 my-lg-0">
-       <a href="{% url 'login' %}"class="btn btn-light">Login</a>
-       
-       <a href="{% url 'cart' %}">
-        <img  id="cart-icon" src="{% static 'images/cart.png' %}">
-      </a>
-      <p id="cart-total">{{cartItems}}</p>
+      {% if user.is_authenticated%}
+        <li class="nav-item dropdown list-unstyled">
+            <a class="nav-link dropdown-toggle text-white" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                                                                    src="{#{{ user.profile.profile_picture.url }}#}"
+                                                                    alt="">
+            </a>
+            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item text-center" href="{#{% url 'customer' user.username %}#}">Profile</a>
+                <hr>
+                <a class="dropdown-item text-center" href="{#{% url 'edit' user.username  %}#}"> Edit profile</a>
+                <hr>
+                <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
 
+
+            </div> 
+        </li>
+        <span>
+          <button class="btn btn-outline-light btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
+            POST YOUR BOOK
+        </button>
+        </span>
+        {% else %}
+        <a href="{% url 'login' %}"class="btn btn-light">Login</a>
+
+        
+        {% endif %}
+        <a href="{% url 'cart' %}">
+          <img  id="cart-icon" src="{% static 'images/cart.png' %}">
+        </a>
+        <p id="cart-total">{{cartItems}}</p>
     </div>
+    
+    
   </div>
   </div> 
 </nav>

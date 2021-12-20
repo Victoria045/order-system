@@ -16,7 +16,7 @@
 					
 					<div id="shipping-info">
 						<hr>
-						<p>Shipping Information:</p>
+						<p>Delivery Information:</p>
 						<hr>
 						<div class="form-field">
 							<input class="form-control" type="text" name="address" placeholder="Address..">
@@ -42,7 +42,7 @@
 
 			<br>
 			<div class="box-element hidden" id="payment-info">
-				<small>Paypal Options</small>
+				<small>Payment Options</small>
 				<!-- <button id="make-payment">Make payment</button> -->
 				<div id="paypal-button-container"></div>
 			</div>
@@ -59,12 +59,12 @@
 				<div class="cart-row">
 					<div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"></div>
 					<div style="flex:2"><p>{{item.product.name}}</p></div>
-					<div style="flex:1"><p>ksh{{item.product.price|floatformat:2}}</p></div>
+					<div style="flex:1"><p>ksh {{item.product.price|floatformat:2}}</p></div>
 					<div style="flex:1"><p>x{{item.quantity}}</p></div>
 				</div>
 				{% endfor %}
 				<h5>Items:   {{order.get_cart_items}}</h5>
-				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
+				<h5>Total:   ksh {{order.get_cart_total|floatformat:2}}</h5>
 			</div>
 		</div>
 	</div>
