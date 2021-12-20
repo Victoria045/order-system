@@ -9,6 +9,7 @@ import json
 import datetime
 from .models import * 
 from .utils import cookieCart, cartData, guestOrder
+from .forms import UserRegisterForm,ProductForm
 
 def index(request):
 	data = cartData(request)
@@ -18,8 +19,19 @@ def index(request):
 	items = data['items']
 
 	products = Product.objects.all()
+	if request.method == 'POST':
+			form = ProductForm(request.POST, request.FILES)
+			# import pdb; pdb.set_trace()
+			if form.is_valid():
+					post = form.save(commit=False)
+					post.user = request.user
+					post.save()
+					return HttpResponseRedirect(request.path_info)
+	else:
+			form = ProductForm()
 	params = {
-        'products':products, 
+        'products':products,
+				'form': form, 
         'cartItems':cartItems
         }
 	return render(request, 'order/index.html', params)
