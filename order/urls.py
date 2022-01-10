@@ -12,9 +12,7 @@ urlpatterns = [
 	path('process_order/', views.processOrder, name="process_order"),
     path('login/',auth_views.LoginView.as_view(), name='login'),
     path('register/',views.register, name='register'),
-     path('account/', include('django.contrib.auth.urls')),
+    path('account/', include('django.contrib.auth.urls')),
     # path('logout/',auth_views.LogoutView.as_view(template_name='registration/login.html'), name='logout'),
    
-]
-if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
